@@ -1,13 +1,37 @@
 import CategoryGridTitle from '@/components/CategoryGridTitle';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FlatList } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
 
-function renderCategoryItem(itemData: { item: { title: string; color: string; } }) {
-    return <CategoryGridTitle title={itemData.item.title} color={itemData.item.color} />
-}
+type RootStackParamList = {
+    MealsCategories: undefined;
+    MealsOverview: undefined;
+};
 
-function CategoryScreen() {
+type CategoryScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    'MealsCategories'
+>;
+
+type Props = {
+    navigation: CategoryScreenNavigationProp;
+};
+
+function CategoryScreen({ navigation }: Props) {
+
+    function renderCategoryItem(itemData: { item: { title: string; color: string; } }) {
+        const pressHandler = () => {
+            navigation.navigate('MealsOverview');
+        };
+
+        return <CategoryGridTitle
+            onPress={pressHandler}
+            title={itemData.item.title}
+            color={itemData.item.color} />
+    }
+
     return <FlatList
+        numColumns={2}
         data={CATEGORIES}
         keyExtractor={(item) => item.id}
         renderItem={renderCategoryItem} />
