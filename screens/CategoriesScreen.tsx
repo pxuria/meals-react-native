@@ -13,15 +13,17 @@ type CategoryScreenNavigationProp = NativeStackNavigationProp<
     'MealsCategories'
 >;
 
-type Props = {
+export type navigationProps = {
     navigation: CategoryScreenNavigationProp;
 };
 
-function CategoryScreen({ navigation }: Props) {
+function CategoryScreen({ navigation }: navigationProps) {
 
-    function renderCategoryItem(itemData: { item: { title: string; color: string; } }) {
+    function renderCategoryItem(itemData: { item: { id: string; title: string; color: string; } }) {
         const pressHandler = () => {
-            navigation.navigate('MealsOverview');
+            navigation.navigate('MealsOverview', {
+                categoryId: itemData.item.id,
+            });
         };
 
         return <CategoryGridTitle
