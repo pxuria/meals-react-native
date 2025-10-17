@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import type { RootStackParamList } from "../types/navigation";
-import MealDetails from "./MealDetails";
+import type { RootStackParamList } from "../../types/navigation";
+import MealDetails from "../MealDetails";
 
 interface Props {
     id: string;
